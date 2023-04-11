@@ -1,0 +1,16 @@
+.container-fluid{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+#successful{
+    width: 3%;
+    margin-top: 20%;
+}
+#addedrow{
+    background: rgba(33, 35, 99, 0.82);
+    border-radius: 5px;
+    height: 88vb;
+}
+#addedsuccessfully{
+    margin-bottom: 25%;
+}

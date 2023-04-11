@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.db.models.query_utils import Q
 from rest_framework import status
 from rest_framework.response import Response
@@ -15,39 +14,67 @@ import datetime
 paginator = PageNumberPagination()
 paginator.page_size = 20
 
+from django.shortcuts import render, get_object_or_404,redirect
+from django.views.generic.base import TemplateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-class OffenseView(APIView):
+from django.views.decorators.http import require_POST
+from django.contrib import messages
+from django.views import View
+# Create your views here.
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login, logout
+from django.shortcuts import resolve_url
+from django.views import View
+from django.shortcuts import redirect
+
+# Create your views here.
+class OffenseView(View):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         instance                    = Offenses()
-        instance.offense             = request.data["offense"]
-        instance.name              = request.data["name"]
-        instance.matric            = request.data["matric"]
-        instance.department        = request.data["department"]
-        instance.punishment        = request.data["punishment"]
-        instance.completed          = request.data["completed"]
-        instance.pardon             = request.data["pardon"]
-        instance.ongoing          = request.data["ongoing"]
+        instance.offense             = request.POST["offense"]
+        instance.name              = request.POST["name"]
+        instance.matric            = request.POST["matric"]
+        instance.department        = request.POST["department"]
+        instance.punishment        = request.POST["punishment"]
+        if request.POST.get("completed") ==True:
+            instance.completed          = True
+        # instance.pardon             = request.POST["pardon"]
+        if request.POST.get("ongoing") ==True:
+            instance.ongoing          = True
         instance.created_at         = datetime.datetime.today()
         instance.save()
-        data = {}
-        data['success'] = "Successfully created"
-        return Response(data=data)
+        data = "Successfully created"
+        messages.success(request, data)
+        template_name = 'offenderadded.html'
+        return render(request, template_name)
+
 
     def delete(self,request):
         offense_id = request.data["offense_id"]
         offense = Offenses.objects.get(offense_id = offense_id)
         offense.delete()
-        data = {}
-        data['success'] = "Deleted Successfully"
-        return Response(data=data)
+        data = "Successfully created"
+        messages.success(request, data)
+        return redirect('/main/get/offense')
 
     def get(self,request):
         content = []
         offenses = Offenses.objects.all()
-        for offense in offenses:
-            data = {}
+        data = {}
+        data["data"] = offenses
+        template_name = 'offenders_list.html'
+        return render(request, template_name, data)
+
+class UpdateOffenseView(View):
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request,offense_id):
+        data = {}
+        if offense_id != "none":
+            offense = Offenses.objects.get(offense_id = offense_id)
             data['offense_id'] = offense.offense_id
             data['offense'] = offense.offense
             data['pardon'] = offense.pardon
@@ -58,14 +85,8 @@ class OffenseView(APIView):
             data['ongoing'] = offense.ongoing
             data['completed'] = offense.completed
             data['created_at'] = offense.created_at
-            content.append(data)
-        
-        context = paginator.paginate_queryset(content, request)
-        page_response = paginator.get_paginated_response(context)
-        return page_response
-
-class UpdateOffenseView(APIView):
-    permission_classes = [IsAuthenticated]
+        template_name = 'index.html'
+        return render(request, template_name,data)
 
     def post(self,request):
         offense_id = request.data["offense_id"]
@@ -79,11 +100,11 @@ class UpdateOffenseView(APIView):
         offense.pardon             = request.data["pardon"]
         offense.ongoing            = request.data["ongoing"]
         offense.save()
-        data = {}
-        data['success'] = "Successfully"
-        return Response(data=data)
+        data = "done"
+        messages.success(request, data)
+        return redirect('/main/get/offense')
 
-class OffenseSsearch(APIView):
+class OffenseSsearch(View):
     permission_classes = [IsAuthenticated]
     
     def get(self,request,query):
@@ -103,11 +124,65 @@ class OffenseSsearch(APIView):
             data['created_at'] = offense.created_at
             content.append(data)
         
-        context = paginator.paginate_queryset(content, request)
-        page_response = paginator.get_paginated_response(context)
-        return page_response
+        context = {}
+        context["report"] = content
+        template_name = 'offenders_list.html'
+        return render(request, template_name, context)
 
-class GetOffenseReport(APIView):
+class GetExpulsion(View):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        query ="explusion"
+        content = []
+        offenses = Offenses.objects.filter(punishment__icontains = query)
+        for offense in offenses:
+            data = {}
+            data['offense_id'] = offense.offense_id
+            data['offense'] = offense.offense
+            data['pardon'] = offense.pardon
+            data['name'] = offense.name
+            data['matric'] = offense.matric
+            data['department'] = offense.department
+            data['punishment'] = offense.punishment
+            data['ongoing'] = offense.ongoing
+            data['completed'] = offense.completed
+            data['created_at'] = offense.created_at
+            content.append(data)
+        
+        context = {}
+        context["list"] = content
+        template_name = 'expulsion_list.html'
+        return render(request, template_name, context)
+
+class GetSuspension(View):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        query ="suspension"
+        content = []
+        offenses = Offenses.objects.filter(punishment__icontains = query)
+        for offense in offenses:
+            data = {}
+            data['offense_id'] = offense.offense_id
+            data['offense'] = offense.offense
+            data['pardon'] = offense.pardon
+            data['name'] = offense.name
+            data['matric'] = offense.matric
+            data['department'] = offense.department
+            data['punishment'] = offense.punishment
+            data['ongoing'] = offense.ongoing
+            data['completed'] = offense.completed
+            data['created_at'] = offense.created_at
+            content.append(data)
+        
+        context = {}
+        context["list"] = content
+        template_name = 'suspension_list.html'
+        return render(request, template_name, context)
+
+
+class GetOffenseReport(View):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
@@ -128,6 +203,7 @@ class GetOffenseReport(APIView):
                 data["content"].append(data1)
             content.append(data)
 
-        context = paginator.paginate_queryset(content, request)
-        page_response = paginator.get_paginated_response(context)
-        return page_response
+        context = {}
+        context["report"] = content
+        template_name = 'monthly_report.html'
+        return render(request, template_name,context)

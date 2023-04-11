@@ -6,7 +6,7 @@ app_name = "accounts_api"
 urlpatterns = [
     path('welcome', views.welcome_email_view, name='welcome'),
     path('user/', views.user_view.as_view(), name='get_user'),                       #Check user api
-    path('register', views.register_view.as_view(), name='register_user'),              #Register User
+    path('send_otp', views.forgotpassword.as_view(), name='register_user'),              #Register User
     path('login', views.login_view.as_view(), name='login_user'),                       #API login validator
 
     path('auth/', include('dj_rest_auth.urls')),

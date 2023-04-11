@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Home </title>
+    <link rel="icon" href="../Images/buLogo.png">
+    <link rel="stylesheet" href="../home/main.css" />
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+<div class="container-fluid"> 
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" id="loginCol2">
+            <div class="row mt-3">
+                <div class="col-4">
+                    <img src="../Images/buLogo.png" alt="Babcock Logo" id="buLogo">
+                </div>
+                <div class="col-7 mt-1 text-light" id="text-1">
+            STUDENTS' OFFENCE MANAGEMENT SYSTEM
+                </div>
+                </div>
+
+        <div class="row d-flex justify-content-center" id="text-row">
+        <div class="col-11 text-light ml-4" id="siteinfo">
+            Babcock Security officers now have a site to store student offenders' information for safe keeping and record maintenance.   
+        </div> 
+        </div>     
+        </div>
+
+        <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7" id="homeform">
+            <div class="row" id="text-2">
+                <div class="col-12">Log in</div>
+            </div>
+            <form action="../Add Offence/index.html">
+              <div class="row mt-5" id="form-group">
+                <div class="col-12"> 
+                        <div class="form-group">
+                            <label for="Username">Username:</label>
+                            
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <img src="../Images/username.png" alt="username" class="loginicons">
+                                  </span>
+                                 </div> 
+                                  <input type="text" class="form-control" id="input-field" required>
+                              </div>
+                              
+                          
+                          </div>
+                    
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                         <span class="input-group-text">
+                           <img src="../Images/password.png" alt="password" class="loginicons">
+                         </span>
+                        </div> 
+                         <input type="password" class="form-control" id="input-field" required>
+                     </div>
+                
+                    </div>
+                    <div class="form-group form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox"> Show Password
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-block text-light mt-5" id="loginBtn">Login</button>
+                </div>
+            </div>
+            </form>
+            
+                <div class="row mt-4">
+                    <a class="col-4 text-2" href="../forgotpassword/index.html">Forgot Password</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+  </body>
+</html>

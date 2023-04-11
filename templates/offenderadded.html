@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Offender Added</title>
+    <link rel="icon" href="{% static 'Images/buLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+<div class="container-fluid"> 
+    <div class="row">
+        <div class="col-2" id="loginCol1">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <img src="{% static 'Images/buLogo.png' %}" alt="Babcock Logo" id="buLogo">
+                </div>
+
+            </div> 
+            <div class="row text-light">
+                <div class="offence">
+                    <div class="col-12" id="items">
+                        <a  href="/main/get/offense"  class="offenceicons">
+                            <img src="{% static 'add_offence/offendericon1.png' %}" alt="offender list" onclick="offenderslist()"  id="offenderslist">
+                            <span onclick="offenderslist()" id="offenderfont">Offenders list</span> 
+                        </a>
+                       
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="/main/get/offense-form/none"  class="offenceicons">
+                            <img src="{% static 'add_offence/addoffence1.png' %}" alt="add offence" onclick="addoffence()" id="addoffence">
+                        <span onclick="addoffence()" id="addoffencefont">Add Offence</span> 
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="../Monthly Report/index.html"  class="offenceicons">
+                            <img src="{% static 'add_offence/report2.png' %}" alt="report" onclick="report()" id="report">
+                            <span onclick="report()" id="reportfont">Monthly Report</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="../Suspension List/index.html"  class="offenceicons">
+                            <img src="{% static 'add_offence/suspension1.png' %}" alt="sus" onclick="sus()" id="sus">
+                            <span onclick="sus()" id="susfont">Suspension List</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="../Expulsion List/index.html"  class="offenceicons">
+                            <img src="{% static 'add_offence/expulsion1.png' %}" alt="exp" onclick="exp()" id="exp">
+                            <span onclick="exp()" id="expfont">Expulsion List</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12 ml-4" id="items">
+                        <a href="">
+                            <img src="{% static 'add_offence/logout.png' %}" alt="Babcock Logo">
+                            <span id="logout"> Logout</span>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+
+            </div> 
+        </div>
+
+        <div class="col-sm-12 col-md-9" id="col-9">
+            <div class="row" id="row-3">
+                <div class="col-4  mt-2 mb-2">
+                    <img src="{% static 'add_offence/admin.png' %}" alt="admin">
+                </div>
+                <div class="col-8 text-light mt-3 mb-4" id="buoms">
+                   BABCOCK UNIVERSITY OFFENCE MANAGEMENT SYSTEM
+                </div>
+            </div>
+            <div class="row mt-3" id="addedrow">
+                <div class="col-12">
+                    <img src="{% static 'Images/Check2.png' %}" alt="successful" id="successful" class="mx-auto d-block">
+                </div>
+                <div class="col-12 text-center text-light" id="addedsuccessfully">
+                    OFFENDER SUCCESSFULLY ADDED
+                </div>
+            </div>
+                
+        </div>
+    </div>
+</div>
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>

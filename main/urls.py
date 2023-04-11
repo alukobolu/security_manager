@@ -7,16 +7,19 @@ urlpatterns = [
    
     path('create/offense', views.OffenseView.as_view(), name='create-offense'), #post
     
-    
+    path('get/offense', views.OffenseView.as_view(), name='get-offense'), #get
     
     path('delete/offense', views.OffenseView.as_view(), name='delete-offense'), #delete
     
+    path('get/expulsion', views.GetExpulsion.as_view(), name='get-expulsion'), #get
 
+    path('get/suspension', views.GetSuspension.as_view(), name='get-suspension'), #get
     
     path('get/offense', views.OffenseView.as_view(), name='get-offense'), #get
     
 
-    path('complete/punishment', views.UpdateOffenseView.as_view(), name='complete-punishment'), #post
+    path('update/offense', views.UpdateOffenseView.as_view(), name='update-offense'), #post
+    path('get/offense-form/<offense_id>', views.UpdateOffenseView.as_view(), name='get-update-offense'), #get
     
     path('student/search/<query>', views.OffenseSsearch.as_view(), name='offense-search'), #post
 

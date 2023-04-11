@@ -1,0 +1,96 @@
+#form-group{
+    width:40%;
+    margin-top: 8%;
+}
+#form-group2{
+    width:40%;
+    margin-top: 8%;
+}
+.text-1{
+    font-size: 160%;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+.text-2{
+    font-size: 135%;
+    margin-top: 5%;
+    font-family: 'Poppins', sans-serif;
+}
+.text-3{
+    font-family: 'Poppins', sans-serif;
+    color:gray
+}
+.text-4{
+    font-family: 'Poppins', sans-serif;
+    color: grey;
+}
+::placeholder {
+   font-style: italic;
+   font-family: 'Poppins', sans-serif;
+ }
+#doneBtn{
+    background:#3E0896;
+    font-family: 'Poppins', sans-serif;
+}
+.resendCode{
+    margin-left: 83%;
+    color:#3E0896;
+    font-family: 'Poppins', sans-serif;
+}
+#resendCode:hover{
+    text-decoration: none;
+    color:#3E0896;
+    font-family: 'Poppins', sans-serif;
+}
+.forgotpassword:hover{
+    text-decoration: none;
+    color:#3E0896;
+}
+.back{
+    color: #3E0896;
+    margin-left: -8%;
+    font-family: 'Poppins', sans-serif;
+}
+.message{
+    font-family: 'Poppins', sans-serif;
+    color: red;
+}
+.col2{
+    width: 10%;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.verify{
+    text-align: center;
+}
+.error{
+    display: none;
+    width: 3%;
+    height: 3%;
+    margin-top: 1%;
+}
+.flex2{
+    display: flex;
+}
+#email{
+    text-align: center;
+}
+@media only screen and (max-width: 767px) {
+ 
+    #form-group{
+       width: 75%;
+       margin-top: 30%;
+    }
+    #form-group2{
+        width: 75%;
+        margin-top: 30%;
+     }
+     .resendCode{
+        margin-left: 36%;
+    }
+} 
+

@@ -6,26 +6,17 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-
+from django.contrib import messages
+from django.views import View
 
 from . import serializers
 from .models import Account,SocialLogin,UserOtp
 
 #For authentication
-from django.contrib.auth import authenticate,logout
-
-#For gmail login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,logout,login
 
 #For email verification
-from rest_framework.decorators import api_view, permission_classes
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from .tokens import account_activation_token
-from django.core.mail import EmailMessage
-from django.conf import settings
+
 from django.core.mail import send_mail
 
 
@@ -62,7 +53,7 @@ def send_email(request, account, mail_subject,message):
     )
     
 
-class check_user(APIView):
+class check_user(View):
     def get(self,request,user):
         data ={}
         try:
@@ -76,10 +67,10 @@ class check_user(APIView):
             data["result"]     = result
         except:
             data["Error"]     = "Sorry something when wrong"
-        return Response(data=data)
-
+        template_name = 'report.html'
+        return render(request, template_name,data)
 # Create your views here.
-class user_view(APIView):
+class user_view(View):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         data = {}
@@ -88,15 +79,8 @@ class user_view(APIView):
         data = serializer.data
         data['email_verified'] = user.email_verified
         data['profile_image'] = data['profile_image']
-        # if user.plan != None:
-        #     data['plan'] = user.plan.space_size
-        #     data['plan_desc'] = user.plan.desc
-        #     data['amount'] = user.plan.amount
-        # else:
-        #     data['plan'] = None
-        #     data['plan_desc'] = None
-        #     data['amount'] = None
-        return Response(data, status=status.HTTP_200_OK)
+        template_name = 'report.html'
+        return render(request, template_name, data, status=status.HTTP_200_OK)
 
      #for Updating user 
     def put(self, request):
@@ -122,26 +106,30 @@ class user_view(APIView):
 
         else:
             data = serializer.errors   
-        return Response(data,  status=status.HTTP_200_OK)
+        
+        template_name = 'report.html'
+        return render(request, template_name,data,  status=status.HTTP_200_OK)
 
 #Register users
-class register_view(APIView):
+class forgotpassword(View):
     def post(self, request):
         data = {}   #This is all the data that is been passed to the api Eg. Contex variables
         # current_site = get_current_site(request)
-        serializer = serializers.RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            account = serializer.save()
-            otp = create_otp(account.email)
-            data['success'] = "Successfully registered."
-            data['email'] = account.email
-        else:
-            data = serializer.errors
-        return Response(data)
+        
+        otp = create_otp("email")
+        data['otp'] = otp
+
+        template_name = 'forgotpassword.html'
+        return render(request, template_name,data)
 
 #Login view for validation
-class login_view(APIView):
+class login_view(View):
     data = {}  
+
+    def get(self, request):
+        template_name = 'home.html'
+        return render(request, template_name)
+    
     def post(self, request):
         credentials = request.data['username']
         password = request.data['password']
@@ -161,15 +149,16 @@ class login_view(APIView):
             # Check if username and passowrd match
             userAuth = authenticate(username=account_cred, password=password) 
 
-            if userAuth is not None:					 		
+            if userAuth is not None:	
+                login(request,userAuth)				 		
                 self.data['error'] = False
             else:
                 self.data['error'] = "Incorrect password"
 
-        return Response(self.data)
+        return redirect("/main/get/offense")
 
 #Login view for validation
-class verify_email(APIView):
+class verify_email(View):
     data = {}  
     def post(self, request):
         email = request.data['email']
@@ -181,11 +170,12 @@ class verify_email(APIView):
             self.data['success'] = "Successfully Verified email"
         else:
             self.data['error'] = "OTP code is invalid"
-        return Response(self.data)
+        template_name = 'report.html'
+        return render(request, template_name,self.data,  status=status.HTTP_200_OK)
 
 # Login with google 
 
-@api_view(['POST'])
+
 def welcome_email_view(request):
     data = {}
     account =  get_object_or_404(Account, email=request.data['email'])
@@ -195,10 +185,11 @@ def welcome_email_view(request):
     else:
         data['verified'] = True
     data['success'] = "Success"
-    return Response(data)
+    template_name = 'report.html'
+    return render(request, template_name,data, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
+
 def setting_password(request):
     password = request.POST['password']
     confirm_password = request.POST['confirm_password']
@@ -209,9 +200,10 @@ def setting_password(request):
         user.save()
         data ={}
         data['success'] = "Successfully set password"
-        return Response(data=data)
+        messages.success(request, "data")
+        template_name = 'report.html'
+        return render(request, template_name,data, status=status.HTTP_200_OK)
     else:
-        data ={}
-        data['error'] = "Passwords do not match"
-        return Response(data=data)
-
+        messages.success(request, "data")
+        template_name = 'report.html'
+        return render(request, template_name,data, status=status.HTTP_200_OK)

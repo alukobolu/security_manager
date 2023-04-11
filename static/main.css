@@ -1,0 +1,256 @@
+.container-fluid{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+thead{
+    background: rgba(62, 8, 150, 1);
+    color: white;
+}
+
+td{
+    text-align: center;
+    background: white;
+}
+.loginicons{
+    width: 85%;
+}
+
+#loginCol1{
+    background:#3E0896;
+    border-radius: 5px;
+    height: 95vb;
+    margin-top: 1.2%;
+    margin-left: 0.3%;
+    position: fixed;
+}
+#loginCol2{
+    background:#3E0896;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 100vb;
+   }
+#text-row{
+    background-image:linear-gradient(to right,rgba(0, 0, 0, 0.3),rgb(86, 28, 145));
+    width: 80%;
+    height: 25%;
+    margin-left: 10%;
+    margin-top: 70%;
+    margin-bottom: 42%;
+    border-radius: 4%;
+}
+#text-1{
+    font-size: larger;
+}
+#text-2{
+    font-size: 180%;
+    margin-left: 50%;
+    margin-top: 20%;
+    font-weight: bold;
+}
+#loginBtn{
+    background:#3E0896;
+}
+#form-group{
+    width:70%;
+    margin-left:25%
+}
+ .input-icons i {
+    position: absolute;
+}
+  
+.input-icons {
+    width: 100%;
+}
+  
+.icon {
+    height: 31px;
+    min-width: 20px;
+    padding-top: 0.7%;
+    padding-bottom: 0.7%;
+    border: 1px solid rgba(147, 134, 170, 0.6);
+    background: rgba(33, 35, 99, 0.25);
+    width: 2.5%;
+} 
+
+#name{
+    margin-left: 20%;
+}
+
+#matric{
+    margin-left: 11.5%;
+}
+#course{
+    margin-left: 10%;
+}
+
+#offencecomm{
+    margin-left: 7%;
+}
+#pungiven{
+    margin-left: 7.5%;
+}
+
+.text-2{
+    color:#3E0896;
+    margin-left: 76%;
+}
+.text-2:hover{
+    text-decoration: none;
+    color:#3E0896;
+}
+
+.offence{
+    display: flex;
+    flex-direction: column;
+    margin-top:115%;
+    margin-left: 15%;
+    justify-content: space-around;
+}
+#row-3{
+    background:rgba(147, 143, 154, 1);
+    border-radius: 5px;
+    position: fixed;
+    width: 75%;
+}
+#buoms{
+    font-size: larger;
+}
+#offenceform{
+    background: rgba(33, 35, 99, 0.82);
+    border-radius: 5px;
+    margin-top: 7%;
+}
+#offence-text-1{
+    border-bottom: 1px solid rgba(147, 143, 154, 0.6);
+    margin-left: 20%;
+    font-size: larger;
+}
+.control{
+    text-align: center;
+    height: 31px;
+    width: 50%;
+}
+.control:focus {
+    color: #495057;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(33, 35, 99, 0.82);
+}
+#status{
+    font-size:90%;
+}
+#offenceinput{
+    border-bottom: 1px solid rgba(147, 143, 154, 0.6);
+    font-size:90%;
+    margin-left: 37%;
+}
+.form-control{
+    text-align: center;
+}
+#siteinfo{
+    margin-top: 9.5%;
+}
+#items{
+    margin-top: -9px;
+}
+#welcome{
+    background: url("../babcock.jpg");
+    background-repeat: no-repeat;
+}
+#welcometext{
+    margin-top: 30%;
+}
+#col-9{
+    margin-left: 21%;
+}
+.offenceicons:hover{
+    text-decoration: none;
+    color: white;
+}
+.offenceicons{
+    color: white;
+}
+#search:focus{
+    color: #495057;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(33, 35, 99, 0.82);
+}
+#search{
+    text-align: center;
+    border-radius: 14px;
+    margin-left: 70%;
+    width: 70%;
+}
+#offlist{
+    background-color: rgba(33, 35, 99, 0.82);
+    margin-top: 7%;
+}
+.card{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+.profile{
+    height: 60px;
+    margin-top: -5%;
+}
+.card-title,#cardcourse{
+    margin-left: 35%;
+}
+.profilematric{
+    margin-left: 20%;
+}
+
+.tab{
+    margin-top: 7%;
+    background-color: rgba(33, 35, 99, 0.82);
+    padding: 30px;
+}
+#susandexp{
+    margin-top: 7%;
+    background-color: rgba(33, 35, 99, 0.82);
+    padding: 30px;
+}
+#logout{
+    color: white;
+}
+#logout:hover{
+    color: white;
+    text-decoration: none;
+}
+@media only screen and (max-width: 767px) {
+    .text-2{
+        color:#3E0896;
+        margin-left: 46%;
+    } 
+    #loginCol2{
+        border-radius: 0;
+    }
+    #homeform{
+        margin-right: 10%;
+    }
+    #text-2{
+        margin-left: 40%;
+    }
+    .text-2{
+        margin-left: 45%;
+    }
+    #form-group{
+        width:90%;
+        margin-left:12%;
+    }
+} 
+
+
+/*all tablets*/
+/* @media only screen   
+and (min-width: 768px)   and (max-width: 1023px)
+{ 
+    
+}  */
+
+/*all laptops*/
+ /* @media only screen   
+and (min-width: 1024px)
+{ 
+} */
