@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Verify Email </title>
-    <link rel="icon" href="../Images/buLogo.png">
-    <link rel="stylesheet" href="../forgotpassword/main.css" />
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+    <link rel="icon" href="{% static 'Images/buLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'forgot_main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
   </head>
 
   <body>
     <div class="container" id="form-group">
       <div class="row">
         <div class="col-12">
-          <img src="../Images/key.png" alt="key" class=" mx-auto d-block">
+          <img src="{% static 'Images/key.png' %}" alt="key" class=" mx-auto d-block">
          </div>
         <div class="col-12 text-center text-1 mt-5">
         ENTER VERIFICATION CODE
@@ -22,23 +23,24 @@
         <div class="col-12 text-center mt-2 text-4">
       Please enter the 5-digit OTP sent to your email
          </div>
-          <form action="../resetpassword/index.html">
+          <form action="/accounts/verify/email/" method="post">
+            {% csrf_token %}
             <div class="flex">
               <div class="col2 mt-5">
-                <input type="text" class="form-control verify" maxlength="1"  required>
-             </div>
-             <div class="col2 mt-5">
-                <input type="text" class="form-control verify" maxlength="1"  required>
-             </div>
-             <div class="col2 mt-5">
-              <input type="text" class="form-control verify" maxlength="1"  required>
-            </div>
-            <div class="col2 mt-5">
-              <input type="text" class="form-control verify" maxlength="1"  required>
-            </div>
-            <div class="col2 mt-5">
-              <input type="text" class="form-control verify" maxlength="1"  required>
-            </div>
+                <input type="text" class="form-control verify"  maxlength="10"  required>
+              </div>
+              <div class="col2 mt-5">
+                <input type="text" class="form-control verify"  maxlength="10"  required>
+              </div>
+              <div class="col2 mt-5">
+                <input type="text" class="form-control verify"  maxlength="10"  required>
+              </div>
+              <div class="col2 mt-5">
+                <input type="text" class="form-control verify"  maxlength="10"  required>
+              </div>
+              <div class="col2 mt-5">
+                <input type="text" class="form-control verify"  maxlength="10"  required>
+              </div>
             </div>
             <br>
             <a href="" class="resendCode">Resend Code</a>
@@ -46,10 +48,13 @@
           </form>
           
          
-        <a class="col-4 mt-5 back forgotpassword" href="../forgotpassword/index.html"><img src="../Images/back.png" alt="back"> Back</a>
+        <a class="col-4 mt-5 back forgotpassword" href="/accounts/send_otp"><img src="{% static 'Images/back.png' %}" alt="back"> Back</a>
       </div>
       
        
     </div>
+    <script>
+      alert( {{otp}} );
+    </script>
   </body>
   </html>

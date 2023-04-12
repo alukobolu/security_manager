@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Home </title>
-    <link rel="icon" href="../Images/buLogo.png">
-    <link rel="stylesheet" href="../home/main.css" />
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
-    <script src="../bootstrap/js/jquery.min.js"></script>
-    <script src="../bootstrap/js/popper.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link rel="icon" href="{% static 'Images/buLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   </head>
   <body>
 <div class="container-fluid"> 
@@ -18,7 +19,7 @@
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" id="loginCol2">
             <div class="row mt-3">
                 <div class="col-4">
-                    <img src="../Images/buLogo.png" alt="Babcock Logo" id="buLogo">
+                  <img src="{% static 'Images/buLogo.png' %}" alt="Babcock Logo" id="buLogo">
                 </div>
                 <div class="col-7 mt-1 text-light" id="text-1">
             STUDENTS' OFFENCE MANAGEMENT SYSTEM
@@ -36,7 +37,8 @@
             <div class="row" id="text-2">
                 <div class="col-12">Log in</div>
             </div>
-            <form action="../Add Offence/index.html">
+            <form action="/accounts/login" method="post">
+              {% csrf_token %}
               <div class="row mt-5" id="form-group">
                 <div class="col-12"> 
                         <div class="form-group">
@@ -45,10 +47,10 @@
                               <div class="input-group">
                                  <div class="input-group-prepend">
                                   <span class="input-group-text">
-                                    <img src="../Images/username.png" alt="username" class="loginicons">
+                                    <img src="{% static 'Images/username.png' %}" alt="username" class="loginicons">
                                   </span>
                                  </div> 
-                                  <input type="text" class="form-control" id="input-field" required>
+                                  <input type="text" class="form-control" name="username" id="input-field" required>
                               </div>
                               
                           
@@ -60,10 +62,10 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                          <span class="input-group-text">
-                           <img src="../Images/password.png" alt="password" class="loginicons">
+                           <img src="{% static 'Images/password.png' %}" alt="password" class="loginicons">
                          </span>
                         </div> 
-                         <input type="password" class="form-control" id="input-field" required>
+                         <input type="password" name="password" class="form-control" id="input-field" required>
                      </div>
                 
                     </div>
@@ -78,7 +80,7 @@
             </form>
             
                 <div class="row mt-4">
-                    <a class="col-4 text-2" href="../forgotpassword/index.html">Forgot Password</a>
+                    <a class="col-4 text-2" href="/accounts/send_otp">Forgot Password</a>
                 </div>
         </div>
     </div>

@@ -21,7 +21,7 @@ from django.core.mail import send_mail
 
 
 def create_otp(email):
-    otp = random.randint(1000, 9999)
+    otp = random.randint(10000, 99999)
 
     if UserOtp.objects.filter(email=email).exists():
         UserOtp.objects.get(email=email).delete()
@@ -112,14 +112,19 @@ class user_view(View):
 
 #Register users
 class forgotpassword(View):
+
+    def get(self, request):
+        template_name = 'forgotpassword.html'
+        return render(request, template_name)
+
     def post(self, request):
         data = {}   #This is all the data that is been passed to the api Eg. Contex variables
         # current_site = get_current_site(request)
-        
-        otp = create_otp("email")
+        email = request.POST['email']
+        otp = create_otp(email)
         data['otp'] = otp
 
-        template_name = 'forgotpassword.html'
+        template_name = 'verifyaccount.html'
         return render(request, template_name,data)
 
 #Login view for validation
@@ -131,8 +136,8 @@ class login_view(View):
         return render(request, template_name)
     
     def post(self, request):
-        credentials = request.data['username']
-        password = request.data['password']
+        credentials = request.POST['username']
+        password = request.POST['password']
         # Check if username or email exist 
         if Account.objects.filter(email=credentials).exists()==True:
             account_cred =  Account.objects.get(email=credentials) 	
@@ -161,17 +166,16 @@ class login_view(View):
 class verify_email(View):
     data = {}  
     def post(self, request):
-        email = request.data['email']
-        otp = request.data['otp']
-        result = verify_otp(email,otp)
-        if result == True:
-            request.user.email_verified = True
-            request.user.save()
-            self.data['success'] = "Successfully Verified email"
-        else:
-            self.data['error'] = "OTP code is invalid"
-        template_name = 'report.html'
-        return render(request, template_name,self.data,  status=status.HTTP_200_OK)
+        # email = request.POST['email']
+        # otp = request.POST['otp']
+        # result = verify_otp(email,otp)
+        # if result == True:
+        #     request.user.email_verified = True
+        #     request.user.save()
+        #     self.data['success'] = "Successfully Verified email"
+        # else:
+        #     self.data['error'] = "OTP code is invalid"
+        return redirect("/main/get/offense")
 
 # Login with google 
 
