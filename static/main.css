@@ -71,7 +71,9 @@ td{
     background: rgba(33, 35, 99, 0.25);
     width: 2.5%;
 } 
-
+#addedrow{
+    margin-bottom: -50%;
+}
 #name{
     margin-left: 20%;
 }
@@ -154,11 +156,23 @@ td{
     margin-top: -9px;
 }
 #welcome{
-    background: url("../babcock.jpg");
-    background-repeat: no-repeat;
 }
 #welcometext{
-    margin-top: 30%;
+    margin-top: 6.5%;
+    background: rgba(33, 35, 99, 0.59);
+    font-size: large;
+    margin-left: 8.5%;
+    padding: 2.5%;
+}
+#welcometext-2{
+    margin-top: 16.5%;
+    font-size: xx-large;
+}
+#welcomebtn{
+    background: #3E0896;
+    color: white;
+    margin-bottom: 5.8%;
+    padding: 1%;
 }
 #col-9{
     margin-left: 21%;

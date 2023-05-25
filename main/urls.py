@@ -4,7 +4,8 @@ from . import views
 app_name = "main_api"
 
 urlpatterns = [
-   
+    path('', views.Welcome.as_view(), name='welcome'), #get
+
     path('create/offense', views.OffenseView.as_view(), name='create-offense'), #post
     
     path('get/offense', views.OffenseView.as_view(), name='get-offense'), #get

@@ -26,35 +26,26 @@
           <form action="/accounts/verify/email/" method="post">
             {% csrf_token %}
             <div class="flex">
-              <div class="col2 mt-5">
-                <input type="text" class="form-control verify"  maxlength="10"  required>
+              <div class="col-12 mt-5">
+                <input type="hidden" class="form-control verify offset-5" name="email" value="{{email}}" >
+                <input type="text" class="form-control verify offset-5"  maxlength="10" name="otp" id="otp"  required>
               </div>
-              <div class="col2 mt-5">
-                <input type="text" class="form-control verify"  maxlength="10"  required>
-              </div>
-              <div class="col2 mt-5">
-                <input type="text" class="form-control verify"  maxlength="10"  required>
-              </div>
-              <div class="col2 mt-5">
-                <input type="text" class="form-control verify"  maxlength="10"  required>
-              </div>
-              <div class="col2 mt-5">
-                <input type="text" class="form-control verify"  maxlength="10"  required>
-              </div>
+              <a href=""><span  class="resendCode"> Resend Code</span></a>
             </div>
             <br>
-            <a href="" class="resendCode">Resend Code</a>
-            <button type="submit" class="btn btn-block text-light mt-4" id="doneBtn">Done</button>
+            
+            <button type="submit" class="btn btn-block text-light mt-4 offset-5" id="doneBtn">Done</button>
           </form>
           
          
-        <a class="col-4 mt-5 back forgotpassword" href="/accounts/send_otp"><img src="{% static 'Images/back.png' %}" alt="back"> Back</a>
+        <a class="col-4 forgotpassword" href="/accounts/send_otp"><img src="{% static 'Images/back.png' %}" alt="back" > Back</a>
       </div>
       
        
     </div>
     <script>
       alert( {{otp}} );
+
     </script>
   </body>
   </html>

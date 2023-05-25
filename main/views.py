@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import *
 from accounts.models import *
 from django.db.models import Count
@@ -27,6 +27,12 @@ from django.contrib.auth import login, logout
 from django.shortcuts import resolve_url
 from django.views import View
 from django.shortcuts import redirect
+
+class Welcome(View):
+    permission_classes = [AllowAny]
+    def get(self,request):
+        template_name = 'welcomepage.html'
+        return render(request, template_name)
 
 # Create your views here.
 class OffenseView(View):
@@ -85,20 +91,22 @@ class UpdateOffenseView(View):
             data['ongoing'] = offense.ongoing
             data['completed'] = offense.completed
             data['created_at'] = offense.created_at
-        template_name = 'index.html'
+            template_name = 'statusupdate.html'
+        else:
+            template_name = 'index.html'
         return render(request, template_name,data)
 
     def post(self,request):
-        offense_id = request.data["offense_id"]
+        offense_id = request.POST["offense_id"]
         offense = Offenses.objects.get(offense_id = offense_id)
-        offense.offense           = request.data["offense"]
-        offense.name              = request.data["name"]
-        offense.matric            = request.data["matric"]
-        offense.department        = request.data["department"]
-        offense.punishment        = request.data["punishment"]
-        offense.completed         = request.data["completed"]
-        offense.pardon             = request.data["pardon"]
-        offense.ongoing            = request.data["ongoing"]
+        offense.offense           = request.POST["offense"]
+        offense.name              = request.POST["name"]
+        offense.matric            = request.POST["matric"]
+        offense.department        = request.POST["department"]
+        offense.punishment        = request.POST["punishment"]
+        offense.completed         = request.POST["completed"]
+        offense.pardon             = request.POST["pardon"]
+        offense.ongoing            = request.POST["ongoing"]
         offense.save()
         data = "done"
         messages.success(request, data)
@@ -133,7 +141,7 @@ class GetExpulsion(View):
     permission_classes = [IsAuthenticated]
     
     def get(self,request):
-        query ="explusion"
+        query ="expulsion"
         content = []
         offenses = Offenses.objects.filter(punishment__icontains = query)
         for offense in offenses:
@@ -196,11 +204,24 @@ class GetOffenseReport(View):
             offenses1 = Offenses.objects.filter(created_at__month = month).annotate(total=Count('offense_id'))
             print(offenses1)
             data["content"] = []
+            off = set()
             for offens in offenses1:
+                off.add(offens.offense)
+            for o in off:
+                num = 0
+                for f in offenses1:
+                    if f.offense == o:
+                        num = num + f.total
                 data1 = {}
-                data1["offense"] = offens.offense
-                data1['total'] = offens.total
+                data1["offense"] = o
+                data1['total'] = num
                 data["content"].append(data1)
+
+            # for offens in offenses1:
+            #     data1 = {}
+            #     data1["offense"] = offens.offense
+            #     data1['total'] = offens.total
+            #     data["content"].append(data1)
             content.append(data)
 
         context = {}

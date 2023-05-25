@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="icon" href="{% static 'Images/buLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome-free-5.15.4-web/css/all.css' %}">
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div id="welcome" style="background: url('{% static "Images/school.webp" %}')">
+        <div class="container text-light">
+            <div class="row">
+                <div class="col-12 text-center" id="welcometext-2"> WELCOME TO OUR BABCOCK UNIVERSITY STUDENTS' OFFENCE MANAGEMENT SYSTEM</div>
+            </div>
+            <div class="row">
+                <div class="col-10" id="welcometext">
+                    Our system is designed to help educational institutions
+                     manage student offences and maintain a safe and respectful
+                      learning environment for all students. With our system,
+                       school SOP officers and other administrators can easily manage 
+                       student misconduct cases and generate monthly reports to analyze trends and patterns.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-5"><a href="/accounts/login"><button class="btn" id="welcomebtn">Get Started</button></a></div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

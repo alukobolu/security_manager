@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Offence Page</title>
+    <link rel="icon" href="{% static 'Images/buLogo.png' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+<div class="container-fluid"> 
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2" id="loginCol1">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <img src="{% static 'Images/buLogo.png' %}" alt="Babcock Logo" id="buLogo">
+                </div>
+
+            </div> 
+            <div class="row text-light">
+                <div class="offence">
+                    <div class="col-12" id="items">
+                        <a  href="/main/get/offense"  class="offenceicons">
+                            <img src="{% static 'add_offence/offendericon1.png' %}" alt="offender list" onclick="offenderslist()"  id="offenderslist">
+                            <span onclick="offenderslist()" id="offenderfont">Offenders list</span> 
+                        </a>
+                       
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="/main/get/offense-form/none"  class="offenceicons">
+                            <img src="{% static 'add_offence/addoffence1.png' %}" alt="add offence" onclick="addoffence()" id="addoffence">
+                        <span onclick="addoffence()" id="addoffencefont">Add Offence</span> 
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="/main/report"  class="offenceicons">
+                            <img src="{% static 'add_offence/report2.png' %}" alt="report" onclick="report()" id="report">
+                            <span onclick="report()" id="reportfont">Monthly Report</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="/main/get/suspension"  class="offenceicons">
+                            <img src="{% static 'add_offence/suspension1.png' %}" alt="sus" onclick="sus()" id="sus">
+                            <span onclick="sus()" id="susfont">Suspension List</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12" id="items">
+                        <a href="/main/get/expulsion"  class="offenceicons">
+                            <img src="{% static 'add_offence/expulsion1.png' %}" alt="exp" onclick="exp()" id="exp">
+                            <span onclick="exp()" id="expfont">Expulsion List</span>
+                        </a>
+                        
+                    </div>
+                    <div class="col-12 ml-4" id="items">
+                        <a href="/accounts/login">
+                            <img src="{% static 'add_offence/logout.png' %}" alt="Babcock Logo">
+                            <span id="logout"> Logout</span>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+
+            </div> 
+        </div>
+
+        <div class="col-sm-12 col-md-9 col-lg-9" id="col-9">
+            <header>
+                <div class="row" id="row-3">
+                    <div class="col-4  mt-2 mb-2">
+                        <img src="{% static 'add_offence/admin.png' %}" alt="admin">
+                    </div>
+                    <div class="col-8 text-light mt-3 mb-4" id="buoms">
+                       BABCOCK UNIVERSITY OFFENCE MANAGEMENT SYSTEM
+                    </div>
+                </div>
+            </header>
+                
+                <section>
+                    <form action="/main/update/offense" method="post">
+                        {% csrf_token %}
+                    <div class="row" id="offenceform">
+                        <div class="col-7 text-light text-center pb-4 mt-4" id="offence-text-1">UPDATE STATUS</div>
+                        <div class="input-icons">
+                            <div class="col-7 mt-5">
+                                <div class="input-group pb-4" id="offenceinput">
+                                    <label class="text-light">Name</label>
+                                   <img src="{% static 'add_offence/student.png' %}" alt="name" class="icon" id="name"> 
+                                    <input type="text" class="control" name="name" value ="{{name}}" >
+                                    <input type="hidden" class="control" name="offense_id" value ="{{offense_id}}">
+                                </div>
+                            </div>
+                            <div class="col-7 mt-4">
+                                <div class="input-group pb-4" id="offenceinput">
+                                    <label  class="text-light">Matric number</label>
+                                    <img src="{% static 'add_offence/hash.png' %}" alt="matric"  class="icon" id="matric">
+                                    <input type="text" class="control" name="matric" value ="{{matric}}">
+                                </div>
+                            
+                            </div>
+                            <div class="col-7 mt-4">
+                                <div class="input-group pb-4" id="offenceinput">
+                                    <label class="text-light">Course of study</label>
+                                   <img src="{% static 'add_offence/book.png' %}" alt="course"  class="icon"  id="course">
+                                    <input type="text" class="control" name="department" value ="{{department}}">
+                                </div>
+                            </div>
+                            
+                            <div class="col-7 mt-4">
+                                <div class="input-group pb-4" id="offenceinput">
+                                    <label class="text-light">Offence committed</label>
+                                    <img src="{% static 'add_offence/Vector.png' %}" alt="offencecommitted" class="icon" id="offencecomm">
+                                    <textarea id="offence" cols="10" rows="1" name="offense"  value ="{{offense}}" class="control">{{offense}}</textarea>
+                                </div>
+                            
+                            </div>
+    
+                            <div class="col-7 mt-4">
+                                <div class="input-group pb-4" id="offenceinput">
+                                    <label class="text-light">Punishment Given</label>
+                                   <img src="{% static 'add_offence/given.png' %}" alt="pungiven"  class="icon"  id="pungiven">
+                                    <input type="text" name="punishment" class="control" value ="{{punishment}}">
+                                </div>
+                            </div>
+    
+                        
+                    </div>
+                       
+    
+                        <div class="col-3 text-light mt-5 offset-3" id="status">Punishment Status:</div>
+                        <div class="form-group form-check col-3 text-light mt-5" id="status">
+                            <label class="form-check-label">
+                              <input class="form-check-input" value="{{ongoing}}" name="ongoing" type="radio" > Ongoing
+                            </label>
+                          </div>
+                          <div class="form-group form-check col-3 text-light mt-5" id="status">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" value ="{{completed}}" name="completed" > Completed
+                            </label>
+                          </div>
+    
+                          <div class="col-4"></div>
+                          <div class="col-2">
+                            <button type="submit" class="btn bg-light mt-3 mb-3">Add</button>
+                          </div>
+                          <div class="col-2">
+                            <button type="reset" class="btn bg-light mt-3 mb-3">Reset</button>
+                          </div>
+                          <div class="col-4"></div>
+                          
+                    </div>
+                    </form>
+                </section>
+               
+        </div>
+    </div>
+</div>
+    <script src="../script.js"></script>
+  </body>
+</html>
